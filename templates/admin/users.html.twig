@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <h1>Users list</h1>
+    <h1 class="text-center mb-4 mt-4">Users list</h1>
     <table class="table">
         <thead>
             <th>ID</th>
@@ -27,6 +27,7 @@
                         {% endif %}          
                 {% endfor %}</td>
                 <td><a href="{{path('admin_edit_user', {'id' : user.id}) }}" class="btn btn-warning">Edit</a></td>
+                <td><a href="{{path('admin_confirm', {'id' : user.id}) }}" class="btn btn-warning">Delete</a></td>
             </tr>
         {% else %}
             <tr>
@@ -35,5 +36,5 @@
         {% endfor %}
         </tbody>
     </table>
-
+<button><a href="{{ path('home')}}" class="btn btn-lg btn-primary">BACK</a></button>
 {% endblock %}

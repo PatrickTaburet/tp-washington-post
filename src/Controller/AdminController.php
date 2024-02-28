@@ -15,6 +15,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminController extends AbstractController
 {
     /**
+     * @Route("/confirm/{id}", name="confirm")
+     */
+    public function confirmDelete(UserRepository $users, $id): Response
+    {
+        return $this->render('admin/confirm.html.twig', [
+            'controller_name' => 'AdminController',
+            'user' => $users->find($id)
+        ]);
+    }
+    /**
      * @Route("/", name="index")
      */
     public function index(): Response
@@ -57,17 +67,17 @@ class AdminController extends AbstractController
             ]);
     } 
 
-    //   /**
-    //  * @Route("/users/delete/{id}", name="delete_user", methods= {"GET"})
-    //  */
-    // public function deleteUser(UserRepository $repo, $id): Response
-    // {
-    //     $user = $repo->find($id);
-    //     $entityManager = $this->getDoctrine()->getManager();
-    //     $entityManager->remove($user);
-    //     $entityManager->flush();
+      /**
+     * @Route("/users/delete/{id}", name="delete_user", methods= {"GET"})
+     */
+    public function deleteUser(UserRepository $repo, $id): Response
+    {
+        $user = $repo->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($user);
+        $entityManager->flush();
 
-    //     $this->addFlash('message', 'User delete succeed');
-    //     return $this->redirectToRoute('admin_users');
-    // }
+        $this->addFlash('message', 'User delete succeed');
+        return $this->redirectToRoute('admin_users');
+    }
 }
