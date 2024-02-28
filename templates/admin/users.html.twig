@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users list{% endblock %}
+
+{% block body %}
+
+    <h1>Users list</h1>
+    <table class="table">
+        <thead>
+            <th>ID</th>
+            <th>Mail</th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+        {%  for user in users %}
+            <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.email}}</td>
+                <td>{% for role in user.roles %}
+                        {% if role == "ROLE_USER" %}
+                            User
+                        {% elseif role == "ROLE_EDITOR" %}
+                            Editor
+                        {% elseif role == "ROLE_ADMIN" %}
+                            Administrtor
+                        {% endif %}          
+                {% endfor %}</td>
+                <td><a href="{{path('admin_edit_user', {'id' : user.id}) }}" class="btn btn-warning">Edit</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan=5>No register users</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

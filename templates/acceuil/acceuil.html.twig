@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acceuil{% endblock %}
+
+{% block body %}
+   <h1 class="text-center">ACCEUIL</h1>
+    {% if is_granted('ROLE_ADMIN') %}
+        <button><a href="{{ path('admin_index')}}" class="btn btn-lg btn-primary">ADMIN</a></button>
+    {% endif %}
+    {% if app.user == false %}
+    <button><a href="{{ path('app_login')}}" class="btn btn-lg btn-primary">LOG IN</a></button>
+    <button><a href="{{ path('register')}}" class="btn btn-lg btn-primary">SIGN IN</a></button>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, 
+            <button><a href="{{ path('app_logout') }}" class="btn btn-lg btn-warning">LOG OUT</a></button>
+           
+        </div>
+    {% endif %}
+{% endblock %}
