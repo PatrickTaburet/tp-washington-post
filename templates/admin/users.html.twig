@@ -8,6 +8,7 @@
     <table class="table">
         <thead>
             <th>ID</th>
+            <th>Avatar</th>
             <th>Mail</th>
             <th>Roles</th>
             <th>Actions</th>
@@ -16,6 +17,7 @@
         {%  for user in users %}
             <tr>
                 <td>{{user.id}}</td>
+                <td><img style ="max-width: 150px" src="{{ vich_uploader_asset(user, 'imageFile') }}" alt=""></td>
                 <td>{{user.email}}</td>
                 <td>{% for role in user.roles %}
                         {% if role == "ROLE_USER" %}
@@ -25,7 +27,8 @@
                         {% elseif role == "ROLE_ADMIN" %}
                             Administrtor
                         {% endif %}          
-                {% endfor %}</td>
+                    {% endfor %}
+                </td>
                 <td><a href="{{path('admin_edit_user', {'id' : user.id}) }}" class="btn btn-warning">Edit</a></td>
                 <td><a href="{{path('admin_confirm', {'id' : user.id}) }}" class="btn btn-warning">Delete</a></td>
             </tr>
