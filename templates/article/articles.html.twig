@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+<img src="{{ asset('images/washington_post.png') }}" alt="washington_post" class="d-block mx-auto">
+<h1 class="text-center mb-4 mt-4">ARTICLES :</h1>
+<div class="container ">
+    <table class="table table-dark table-striped ">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Title</th>
+          <th scope="col">Content</th>
+          <th scope="col">Picture</th>
+          <th scope="col">Author</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      {% for article in data %}
+      <tbody class="table table-striped ">
+        <tr>
+          <th>{{article.id}}</th>
+          <td>{{article.title}}</td>
+          <td>{{article.content}}</td>
+          <td><img style ="max-width: 150px" src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="article_picture"></td>
+           <td>{{article.user.name}} {{article.user.firstname}}</td>
+          <td><a href="{{ path('article_update', {'id': article.id})}}">Update</a>
+          <a href="{{ path('article_delete', {'id': article.id})}}">Delete</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+    <button  ><a href="{{ path('article_create')}}" class="text-decoration-none text-dark"> Add an article </a> </button>
+</div>
+{% endblock %}

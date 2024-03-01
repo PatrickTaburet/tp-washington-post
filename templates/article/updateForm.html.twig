@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h3 class="mt-5 mb-5 text-center">Formulaire de création</h3>
+        <div class="col-md-6 offset-md-3">
+        {{ form_start(form) }}
+            <div class="form-group text-black">
+                {{ form_label(form.title)}}
+                {{ form_widget(form.title, { "attr": {"class" : "form-control" } }) }}
+            </div>
+            <div class="form-group text-black">
+                {{ form_label(form.content) }}
+                {{ form_widget(form.content, { "attr": {"class" : "form-control" } }) }}
+            </div>
+            <div class="form-group">
+                <button class='btn btn-info mt-2 text-white'>Update</button>
+                <button class='btn btn-info mt-2 text-white'><a href="{{ path('article_list')}}" class="text-decoration-none text-dark"> Show articles </a> </button>
+            </div>
+        {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

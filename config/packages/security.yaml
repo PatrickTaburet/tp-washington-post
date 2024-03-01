@@ -34,7 +34,8 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/editor, roles: ROLE_EDITOR }
+        - { path: ^/article, roles: ROLE_EDITOR }
+        # - { path: ^/editor, roles: ROLE_EDITOR }
      
     role_hierarchy:
         ROLE_EDITOR: ROLE_USER
