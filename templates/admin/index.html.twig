@@ -4,10 +4,9 @@
 
 {% block body %}
 
-
-
     <h1>Hello admin !</h1>
     <p>Email: {{ app.user.email }}</p>
     <button><a href="{{ path('admin_users')}}" class="btn btn-lg btn-primary">USERS LIST</a></button>
+    <button><a href="{{ path('article_list')}}" class="btn btn-lg btn-primary">ARTICLE LIST</a></button>
 
 {% endblock %}

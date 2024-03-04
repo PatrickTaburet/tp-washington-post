@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * @Route("/article", name="article_")
+ * @Route("/admin/article", name="article_")
  */
 class ArticleController extends AbstractController
 {
@@ -41,6 +41,7 @@ class ArticleController extends AbstractController
             throw new AccessDeniedException('Vous devez être connecté et avoir le rôle ROLE_EDITOR pour créer un article.');
         }
         $article = new Article(); //Entity name
+
         $article->setUser($this->getUser());
         $form = $this->createForm(ArticleType::class, $article); // creation du form
         $form -> handleRequest($request);  // Gestion des données envoyées
@@ -52,7 +53,7 @@ class ArticleController extends AbstractController
 
             $this->addFlash('notice', 'Soumission réussie !!'); 
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('article_list');
         }
         return $this->render('article/createForm.html.twig', [
             'controller_name' => 'MainController',
@@ -78,7 +79,7 @@ class ArticleController extends AbstractController
 
             $this->addFlash('notice', 'Modification réussie !!'); 
 
-            return $this->redirectToRoute('main');
+            return $this->redirectToRoute('article_list');
         }
         return $this->render('article/updateForm.html.twig', [
             'controller_name' => 'MainController',
@@ -102,7 +103,7 @@ class ArticleController extends AbstractController
         $this->addFlash('notice', 'Suppression réussie !!'); 
 
     
-        return $this->redirectToRoute('article');
+        return $this->redirectToRoute('article_list');
     }
     
 }

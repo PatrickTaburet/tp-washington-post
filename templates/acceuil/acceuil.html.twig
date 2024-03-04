@@ -3,7 +3,10 @@
 {% block title %}Acceuil{% endblock %}
 
 {% block body %}
+    <img src="{{ asset('images/app/washington_post.png') }}" alt="washington_post" class="d-block mx-auto">
+
    <h1 class="text-center">ACCEUIL</h1>
+   
     {% if is_granted('ROLE_ADMIN') %}
         <button><a href="{{ path('admin_index')}}" class="btn btn-lg btn-primary">ADMIN</a></button>
     {% endif %}
@@ -16,7 +19,6 @@
         <div class="mb-3">
             You are logged in as {{ app.user.userIdentifier }}, 
             <button><a href="{{ path('app_logout') }}" class="btn btn-lg btn-warning">LOG OUT</a></button>
-           
         </div>
     {% endif %}
 {% endblock %}
