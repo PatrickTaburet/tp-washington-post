@@ -16,10 +16,13 @@
                 {{ form_label(form.content) }}
                 {{ form_widget(form.content, { "attr": {"class" : "form-control" } }) }}
             </div>
-            <div>image</div>
+            <div>
+                {{ form_label(form.imageFile) }}
+                {{ form_widget(form.imageFile, { "attr": {"class" : "form-control" } }) }}
+            </div>
             <div class="form-group">
                 <button class='btn btn-info mt-2 text-white'>Submit</button>
-                <button class='btn btn-info mt-2 text-white'><a href="{{ path('article_list')}}" class="text-decoration-none text-dark"> Show articles </a> </button>
+                <button class='btn btn-info mt-2 text-white'><a href="{{ path('article_list')}}" class="text-decoration-none text-dark"> Back </a> </button>
             </div>
         {{ form_end(form) }}
         </div>

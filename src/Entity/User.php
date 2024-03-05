@@ -80,6 +80,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToOne(targetEntity=avatar::class, cascade={"persist", "remove"})
+     */
+    private $avatar;
+
 
 
     public function __construct()
@@ -285,6 +290,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUpdatedAt(?DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getAvatar(): ?avatar
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?avatar $avatar): self
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }

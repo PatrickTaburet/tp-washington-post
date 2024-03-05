@@ -25,17 +25,20 @@
   background-color: #f7fafa;
 }
 
-.button-13:focus {
+/* .button-13:focus {
   border-color: #008296;
   box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
   outline: 0;
-}
+} */
 .rightNavBar{
   display: flex;
-  gap: 20px;
+  gap: 15px;
  }
 .adress{
   font-weight: 600;
   color: rgb(0, 0, 255);
 
+}
+img{
+  max-width: 300px;
 }

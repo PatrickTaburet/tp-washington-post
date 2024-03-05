@@ -7,7 +7,7 @@
 
    <h1 class="text-center">ACCEUIL</h1>
    
-    {% if is_granted('ROLE_ADMIN') %}
+    {# {% if is_granted('ROLE_ADMIN') %}
         <button><a href="{{ path('admin_index')}}" class="btn btn-lg btn-primary">ADMIN</a></button>
     {% endif %}
     {% if app.user == false %}
@@ -20,5 +20,5 @@
             You are logged in as {{ app.user.userIdentifier }}, 
             <button><a href="{{ path('app_logout') }}" class="btn btn-lg btn-warning">LOG OUT</a></button>
         </div>
-    {% endif %}
+    {% endif %} #}
 {% endblock %}

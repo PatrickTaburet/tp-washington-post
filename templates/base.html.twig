@@ -46,7 +46,7 @@
                         </li>
                         {% endif %}
                     </ul>
-                    <form class="d-flex justify-content-between width:30%">
+                    <div class="rightNavBar">
                         {% if app.user == false %}
                         <button class="button-13"><a href="{{ path('app_login')}}" class="text-decoration-none text-black" >LOG IN</a></button>
                         <button class="button-13"><a href="{{ path('register')}}" class="text-decoration-none text-black">SIGN IN</a></button>
@@ -54,7 +54,7 @@
 
                         {% if app.user %}
                             <div class="rightNavBar">
-                                You are logged in as <span class="adress">{{ app.user.userIdentifier }}</span>
+                                You are logged in as <span class="adress"><a href="{{path('profile', {'id': app.user.id})}}">{{ app.user.userIdentifier }}</a></span>
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <button  class="button-13"><a href="{{ path('admin_index')}}" class="text-decoration-none text-black">ADMIN</a></button>
                                 {% endif %}
@@ -63,7 +63,7 @@
 
                         {% endif %}
 
-                    </form>
+                    </div>
                 </div>
             </div>
         </nav>

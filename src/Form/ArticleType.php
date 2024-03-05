@@ -24,7 +24,7 @@ class ArticleType extends AbstractType
             ->add('imageFile', VichImageType::class, [
                 'label' => 'Article picture',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
+                    'class' => 'form-label mt-3 '
                 ],
                 'required' => !$isEdit , // image is required only if the form is used for create
             ]);

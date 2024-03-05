@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Modal{% endblock %}
+
+{% block body %}
+
+<div class="">
+  {{ form_start(userForm) }}
+    {{ form_widget(userForm) }}
+  {{ form_end(userForm) }}
+</div>
+     
+{% endblock %}

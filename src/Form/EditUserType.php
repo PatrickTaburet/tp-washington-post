@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\Validator\Constraints\Blank;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,6 +17,8 @@ class EditUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $object = $options['data'] ?? null;
+        $isEdit = $object && $object->getId();
         $builder
             ->add('email', EmailType::class,[
                 'constraints' =>[
@@ -38,7 +41,19 @@ class EditUserType extends AbstractType
                 'multiple' => true,
                 'label' => 'Roles'
             ])
-            -> add('Submit', SubmitType::class)
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'User picture',
+                'label_attr' => [
+                    'class' => 'form-label mt-3 '
+                ],
+                'required' => !$isEdit , // image is required only if the form is used for create
+            ])
+            -> add('Submit', SubmitType::class, [
+                'label' => 'Update',
+                'attr' => [
+                    'class' => 'button-13'
+                ],
+            ])
         ;
     }
 

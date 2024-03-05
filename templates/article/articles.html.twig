@@ -23,7 +23,7 @@
           <th>{{article.id}}</th>
           <td>{{article.title}}</td>
           <td>{{article.content}}</td>
-          <td><img style ="max-width: 150px" src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="article_picture"></td>
+          <td><img src="{{ vich_uploader_asset(article, 'imageFile')}}" alt="article_picture"></td>
            <td>{{article.user.name}} {{article.user.firstname}}</td>
           <td><a href="{{ path('article_update', {'id': article.id})}}">Update</a>
           <a href="{{ path('article_delete', {'id': article.id})}}">Delete</a></td>
