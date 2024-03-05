@@ -58,14 +58,10 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('imageFile', VichImageType::class, [
-                'label' => 'Profile Picture',
-                'required' => false,
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ]
-            ])
-    
+            // ->add('avatar', FileType::class, [
+            //     'mapped' => false,
+            //     'required' => false,
+            // ])
         ; 
            
     }
@@ -75,5 +71,9 @@ class RegistrationFormType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
         ]);
+    }
+    public function getBlockPrefix()
+    {
+        return 'app_profile';
     }
 }

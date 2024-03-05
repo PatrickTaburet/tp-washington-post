@@ -2,13 +2,11 @@
 
 namespace App\Entity;
 
-use DateTimeImmutable;
+
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -16,7 +14,6 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
- * @Vich\Uploadable
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {   
@@ -64,26 +61,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $Article;
 
-    /**
-     * @Vich\UploadableField(mapping="picture_profile", fileNameProperty="imageName")
-     * @var File|null
-     */
-    private $imageFile;
-    
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $imageName;
+   
 
     /**
-    * @ORM\Column(type="datetime_immutable", nullable=true)
-    */
-    private $updatedAt;
-
-    /**
-     * @ORM\OneToOne(targetEntity=avatar::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Avatar::class, cascade={"persist", "remove"})
      */
-    private $avatar;
+    private $Avatar;
 
 
 
@@ -247,61 +230,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
     
-    /**
-     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
-     * of 'UploadedFile' is injected into this setter to trigger the update. If this
-     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
-     * must be able to accept an instance of 'File' as the bundle will inject one here
-     * during Doctrine hydration.
-     *
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
-     */
-    public function setImageFile(?File $imageFile = null): void
+    public function getAvatar(): ?Avatar
     {
-        $this->imageFile = $imageFile;
-
-        if (null !== $imageFile) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
-        }
+        return $this->Avatar;
     }
 
-    public function getImageFile(): ?File
+    public function setAvatar(?Avatar $Avatar): self
     {
-        return $this->imageFile;
-    }
-
-    public function setImageName(?string $imageName): void
-    {
-        $this->imageName = $imageName;
-    }
-
-    public function getImageName(): ?string
-    {
-        return $this->imageName;
-    }
-
-    public function getUpdatedAt(): ?DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?DateTimeImmutable $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getAvatar(): ?avatar
-    {
-        return $this->avatar;
-    }
-
-    public function setAvatar(?avatar $avatar): self
-    {
-        $this->avatar = $avatar;
+        $this->Avatar = $Avatar;
 
         return $this;
     }

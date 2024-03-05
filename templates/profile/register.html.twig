@@ -3,9 +3,9 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
-
-    {{ form_start(registrationForm) }}
+    <h1 id="toto">Register</h1>
+<div>
+    {{ form_start(registrationForm, {'attr': {'id': 'registrationForm'}}) }}
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
@@ -15,8 +15,14 @@
 
         {{ form_row(registrationForm.description) }}
         {{ form_row(registrationForm.agreeTerms) }}
-     
-
-        <button type="submit" class="btn">Register</button>
+   
     {{ form_end(registrationForm) }}
+</div>   
+<div class="">
+    {{ form_start(avatarForm, {'attr': {'id': 'avatarForm'}}) }}
+        {{ form_widget(avatarForm) }}
+    {{ form_end(avatarForm) }}
+</div>
+    <button id="submitBtn" type="submit" class="btn">Register</button>
+     
 {% endblock %}
