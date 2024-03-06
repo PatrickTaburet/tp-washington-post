@@ -39,6 +39,7 @@ class EditUserType extends AbstractType
                 'multiple' => true,
                 'label' => 'Roles'
             ])
+              ->add('avatar', AvatarType::class)
            
             -> add('Submit', SubmitType::class, [
                 'label' => 'Update',

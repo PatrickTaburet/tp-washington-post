@@ -61,7 +61,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $Article;
 
-   
 
     /**
      * @ORM\OneToOne(targetEntity=Avatar::class, cascade={"persist", "remove"})
@@ -240,5 +239,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->Avatar = $Avatar;
 
         return $this;
+    }
+    public function removeFile()
+    {
+        if ($this->Avatar && $this->Avatar->getImageFile()) {
+            $this->Avatar->setImageFile(null);
+        }
     }
 }

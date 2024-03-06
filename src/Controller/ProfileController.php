@@ -49,21 +49,6 @@ class ProfileController extends AbstractController
 
         }
 
-        // $avatar = new Avatar();
-        // $user->setAvatar($avatar);
-        // $avatarForm = $this->createForm(AvatarType::class, $avatar);
-        // $avatarForm->handleRequest($request);
-        // if ($avatarForm->isSubmitted() && $avatarForm->isValid()) {
-        
-        //     // handle avatar upload
-        //     if ($avatar->getImageFile()) {
-        //         $entityManager = $this->getDoctrine()
-        //         ->getManager();
-        //         $entityManager->persist($avatar);
-        //         $entityManager->flush();
-        //     }
-        
-        // }        
 
         return $this->render('profile/register.html.twig', [
             'registrationForm' => $form->createView(),
@@ -77,36 +62,28 @@ class ProfileController extends AbstractController
     public function editUser(Request $request, UserRepository $repo, $id) : Response
     {       
             $user = $repo->find($id);
-            $avatar = $user->getAvatar();
+            
             $userForm = $this->createForm(EditUserType::class, $user);
-            $avatarForm = $this->createForm(AvatarType::class, $avatar);
             $userForm -> handleRequest($request);
-            $avatarForm -> handleRequest($request);
 
             if ($userForm->isSubmitted() && $userForm->isValid()) {
+
+                  // Handle the uploaded avatar image
+                $avatar = $user->getAvatar();
+                $user->setAvatar($avatar);
                 $entityManager = $this->getDoctrine()
                                       ->getManager();
                 $entityManager -> persist($user);
                 $entityManager -> flush();
-
+                $user->removeFile(); // Delete the object file after persist to avoid errors
                 $this ->addFlash('message', 'User edit succeed');
-                return $this->redirectToRoute('home');
-            }
 
-            if ($avatarForm->isSubmitted() && $avatarForm->isValid()) {
-                $entityManager = $this->getDoctrine()
-                                      ->getManager();
-                $entityManager -> persist($avatar);
-                $entityManager -> flush();
-
-                $this ->addFlash('message', 'Profile picture edit succeed');
                 return $this->redirectToRoute('home');
             }
 
             return $this->render('profile/profileModal.html.twig', [
                 'user' => $user,
                 'userForm' => $userForm->createView(),
-                'avatarForm' => $avatarForm->createView(),
             ]);
     } 
 }

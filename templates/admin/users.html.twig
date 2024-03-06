@@ -17,7 +17,11 @@
         {%  for user in users %}
             <tr>
                 <td>{{user.id}}</td>
-                <td><img style ="max-width: 150px" src="{{ vich_uploader_asset(user, 'imageFile') }}" alt=""></td>
+                {% if user.avatar != null %}
+                <td><img style ="max-width: 150px" src="{{ vich_uploader_asset(user.avatar, 'imageFile') }}"  alt="{{ user.firstname }} {{ user.name }}"></td>
+                {% else %}
+                <td><img src=" {{asset('images/avatar/no-profile.jpg')}}" alt="no_profile_picture" width=50 height=50></td>
+                {% endif %}
                 <td>{{user.email}}</td>
                 <td>{% for role in user.roles %}
                         {% if role == "ROLE_USER" %}

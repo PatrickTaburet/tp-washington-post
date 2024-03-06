@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * @Route("/admin/article", name="article_")
+ * @Route("/editor/article", name="article_")
  */
 class ArticleController extends AbstractController
 {
@@ -22,11 +22,33 @@ class ArticleController extends AbstractController
      */
     public function index(ArticleRepository $repo): Response
     {
-        $data = $repo-> findAll();
+        $articles = $repo-> findAll();
 
+        // // Preload user settings
+        // foreach ($articles as $article) {
+        //    $article->getUser()->getName() ; 
+        //    $article->getUser()->getFirstname() ; 
+
+        // }
         return $this->render('article/articles.html.twig', [
-            'controller_name' => 'MainController',
-            'data'=> $data
+            'articles'=> $articles
+        ]);
+    }
+    /**
+     * @Route("/myArticles", name="myArticles")
+     */
+    public function myArticles(ArticleRepository $repo): Response
+    {
+        $articles = $repo-> findAll();
+
+        // // Preload user settings
+        // foreach ($articles as $article) {
+        //    $article->getUser()->getName() ; 
+        //    $article->getUser()->getFirstname() ; 
+
+        // }
+        return $this->render('article/myArticles.html.twig', [
+            'articles'=> $articles
         ]);
     }
 

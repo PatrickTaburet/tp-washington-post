@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Avatar;
 use App\Form\EditUserType;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,8 +40,15 @@ class AdminController extends AbstractController
     */
     public function usersList(UserRepository $users): Response
     {
+        $allUsers = $users->findAll();
+
+        // Preload Avatar objects
+        foreach ($allUsers as $user) {
+           $user->getAvatar();
+        }
+
         return $this->render('admin/users.html.twig', [
-            'users' => $users->findAll()
+            'users' => $allUsers
         ]);
     }
     /**
@@ -49,21 +57,28 @@ class AdminController extends AbstractController
     public function editUser(Request $request, UserRepository $repo, $id) : Response
     {       
             $user = $repo->find($id);
-            $form = $this->createForm(EditUserType::class, $user);
-            $form -> handleRequest($request);
+            
+            $userForm = $this->createForm(EditUserType::class, $user);
+            $userForm -> handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
+            if ($userForm->isSubmitted() && $userForm->isValid()) {
+
+                  // Handle the uploaded avatar image
+                $avatar = $user->getAvatar();
+                $user->setAvatar($avatar);
                 $entityManager = $this->getDoctrine()
                                       ->getManager();
                 $entityManager -> persist($user);
                 $entityManager -> flush();
-
+                $user->removeFile(); // Delete the object file after persist to avoid errors
                 $this ->addFlash('message', 'User edit succeed');
+
                 return $this->redirectToRoute('admin_users');
             }
 
-            return $this->render('admin/edituser.html.twig', [
-                'userForm' => $form->createView()
+            return $this->render('admin/editUser.html.twig', [
+                'user' => $user,
+                'userForm' => $userForm->createView(),
             ]);
     } 
 

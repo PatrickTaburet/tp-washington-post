@@ -20,17 +20,13 @@
       {% for article in articles %}
       <tbody class="table table-striped ">
         <tr>
+         {% if (is_granted('ROLE_EDITOR') and article.user == app.user)%}
           <th>{{article.id}}</th>
           <td>{{article.title}}</td>
           <td>{{article.content}}</td>
           <td><img src="{{ vich_uploader_asset(article, 'imageFile')}}" alt="article_picture"></td>
           <td>{{article.user.name}} {{article.user.firstname}}</td>
-           {% if (is_granted('ROLE_EDITOR') and article.user == app.user)%}
-          <td>
-            <a href="{{ path('article_update', {'id': article.id})}}">Update</a>
-            <a href="{{ path('article_delete', {'id': article.id})}}">Delete</a>
-          </td>
-           {% elseif is_granted('ROLE_ADMIN') %}
+          
           <td>
             <a href="{{ path('article_update', {'id': article.id})}}">Update</a>
             <a href="{{ path('article_delete', {'id': article.id})}}">Delete</a>

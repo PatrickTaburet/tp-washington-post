@@ -15,17 +15,21 @@ class AvatarType extends AbstractType
     {
         //define if the form is used for create or for update ($object + getid)
 
-        $object = $options['data'] ?? null;
-        $isEdit = $object && $object->getId();
+        // $object = $options['data'] ?? null;
+        // $isEdit = $object && $object->getId();
 
         $builder
             ->add('imageFile', VichImageType::class, [
                 'label' => 'User picture',
+                'allow_delete' => true, 
+                'download_link' => true,
                 'label_attr' => [
                     'class' => 'form-label mt-3 '
                 ],
-                'required' => !$isEdit , // image is required only if the form is used for create
+                'required' => false , // image is required only if the form is used for create
             ])
+            // 'required' => !$isEdit , // image is required only if the form is used for create
+
             // ->add('imageName')
             // ->add('updatedAt')
         ;
