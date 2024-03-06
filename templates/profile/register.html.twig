@@ -15,14 +15,14 @@
 
         {{ form_row(registrationForm.description) }}
         {{ form_row(registrationForm.agreeTerms) }}
-   
+   <button id="submitBtn" type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
 </div>   
-<div class="">
+{# <div class="">
     {{ form_start(avatarForm, {'attr': {'id': 'avatarForm'}}) }}
         {{ form_widget(avatarForm) }}
     {{ form_end(avatarForm) }}
-</div>
-    <button id="submitBtn" type="submit" class="btn">Register</button>
+</div> #}
+    
      
 {% endblock %}

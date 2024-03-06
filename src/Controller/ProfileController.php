@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Avatar;
 use App\Entity\User;
+use App\Entity\Avatar;
 use App\Form\AvatarType;
 use App\Form\EditUserType;
 use App\Form\RegistrationFormType;
@@ -25,12 +25,15 @@ class ProfileController extends AbstractController
     /**
      * @Route("/register", name="register")
      */
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, UploaderHelper $uploaderHelper): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            // Handle the uploaded avatar image
+            $avatar = $user->getAvatar();
+            $user->setAvatar($avatar);
             // encode the plain password
             $user->setPassword(
             $userPasswordHasher->hashPassword(
@@ -38,29 +41,33 @@ class ProfileController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-           
+            $entityManager = $this->getDoctrine()
+                                      ->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+            return $this->redirectToRoute('app_login');
+
         }
 
-        $avatar = new Avatar();
-        $user->setAvatar($avatar);
-        $avatarForm = $this->createForm(AvatarType::class, $avatar);
-        $avatarForm->handleRequest($request);
-        if ($avatarForm->isSubmitted() && $avatarForm->isValid()) {
+        // $avatar = new Avatar();
+        // $user->setAvatar($avatar);
+        // $avatarForm = $this->createForm(AvatarType::class, $avatar);
+        // $avatarForm->handleRequest($request);
+        // if ($avatarForm->isSubmitted() && $avatarForm->isValid()) {
         
-            // handle avatar upload
-            if ($avatar->getImageFile()) {
-                $entityManager->persist($avatar);
-                $entityManager->flush();
-            }
+        //     // handle avatar upload
+        //     if ($avatar->getImageFile()) {
+        //         $entityManager = $this->getDoctrine()
+        //         ->getManager();
+        //         $entityManager->persist($avatar);
+        //         $entityManager->flush();
+        //     }
         
-            return $this->redirectToRoute('app_login');
-        }        
+        // }        
 
         return $this->render('profile/register.html.twig', [
             'registrationForm' => $form->createView(),
-            'avatarForm' => $avatarForm->createView(),
+            // 'avatarForm' => $avatarForm->createView(),
         ]);
     }
 
