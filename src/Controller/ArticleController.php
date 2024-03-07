@@ -8,6 +8,7 @@ use App\Repository\ArticleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -92,7 +93,6 @@ class ArticleController extends AbstractController
     public function Update(Request $request, ArticleRepository $repo, $id): Response
     {
         $article = $repo-> find($id);
-            
         $form = $this->createForm(ArticleType::class, $article); // creation du form
         $form -> handleRequest($request);  // Gestion des données envoyées
         if ( $form->isSubmitted() && $form->isValid()){
@@ -102,7 +102,7 @@ class ArticleController extends AbstractController
             $sendDatabase->flush();
 
             $this->addFlash('notice', 'Modification réussie !!'); 
-
+          
             return $this->redirectToRoute('article_list');
         }
         return $this->render('article/updateForm.html.twig', [

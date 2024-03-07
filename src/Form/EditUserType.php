@@ -25,7 +25,7 @@ class EditUserType extends AbstractType
             ->add('firstname')
             ->add('name')
             ->add('description', TextareaType::class, [
-                'label' => 'Desctiption (optional)',
+                'label' => 'Description (optional)',
                 'required' => false,
             ])
             ->add('email', EmailType::class,[

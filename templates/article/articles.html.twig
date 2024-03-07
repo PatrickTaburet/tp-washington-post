@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}Article list{% endblock %}
 
 {% block body %}
-<img src="{{ asset('images/app/washington_post.png') }}" alt="washington_post" class="d-block mx-auto">
-<h1 class="text-center mb-4 mt-4">ARTICLES :</h1>
+<div class="galleryHeader">
+  <h1 class="text-center mt-4">ARTICLES :</h1>
+  <a href="{{ path('article_create')}}" class=" btn btn-info globalButton"> Add an article </a> 
+</div>
 <div class="container ">
     <table class="table table-dark table-striped ">
       <thead>
@@ -14,6 +16,7 @@
           <th scope="col">Content</th>
           <th scope="col">Picture</th>
           <th scope="col">Author</th>
+          <th scope="col">Date</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
@@ -22,9 +25,10 @@
         <tr>
           <th>{{article.id}}</th>
           <td>{{article.title}}</td>
-          <td>{{article.content}}</td>
+          <td class="articleContent">{{article.content}}</td>
           <td><img src="{{ vich_uploader_asset(article, 'imageFile')}}" alt="article_picture"></td>
           <td>{{article.user.name}} {{article.user.firstname}}</td>
+          <td>{{article.updatedAt|date('F j, Y, g:i a')}}</td>
            {% if (is_granted('ROLE_EDITOR') and article.user == app.user)%}
           <td>
             <a href="{{ path('article_update', {'id': article.id})}}">Update</a>
@@ -40,7 +44,7 @@
       {% endfor %}
       </tbody>
     </table>
-
-    <button  ><a href="{{ path('article_create')}}" class="text-decoration-none text-dark"> Add an article </a> </button>
 </div>
+
+
 {% endblock %}

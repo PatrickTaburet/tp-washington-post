@@ -15,6 +15,9 @@
 
         {{ form_row(registrationForm.description) }}
         {{ form_row(registrationForm.agreeTerms) }}
+         <div class="imagePreview"> 
+            {{ form_widget(registrationForm.avatar, { "attr": {"class" : "form-control" } }) }}
+        </div>
    <button id="submitBtn" type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
 </div>   

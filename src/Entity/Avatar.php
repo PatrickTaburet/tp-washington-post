@@ -60,6 +60,10 @@ class Avatar
             $this->updatedAt = new \DateTimeImmutable();
         }
     }
+    public function __construct()
+    {
+        $this->imageName = 'no-profile.jpg'; // Define default image
+    }
 
     public function getImageFile(): ?File
     {

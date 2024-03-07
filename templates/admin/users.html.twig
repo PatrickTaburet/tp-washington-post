@@ -10,6 +10,7 @@
             <th>ID</th>
             <th>Avatar</th>
             <th>Mail</th>
+            <th>Name</th>
             <th>Roles</th>
             <th>Actions</th>
         </thead>
@@ -23,6 +24,7 @@
                 <td><img src=" {{asset('images/avatar/no-profile.jpg')}}" alt="no_profile_picture" width=50 height=50></td>
                 {% endif %}
                 <td>{{user.email}}</td>
+                <td>{{user.firstname}} {{user.name}}</td>
                 <td>{% for role in user.roles %}
                         {% if role == "ROLE_USER" %}
                             User
