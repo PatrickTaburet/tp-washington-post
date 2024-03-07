@@ -42,12 +42,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $name;
 
@@ -168,8 +168,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->firstname;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setFirstname(?string $firstname): self
     {
+        if ($firstname === null) {
+            $firstname = 'unknown';
+        }
         $this->firstname = $firstname;
 
         return $this;
@@ -180,8 +183,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
+        if($name === null){
+            $name = 'unknown';
+        }
         $this->name = $name;
 
         return $this;

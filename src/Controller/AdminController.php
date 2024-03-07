@@ -58,12 +58,16 @@ class AdminController extends AbstractController
     {       
             $user = $repo->find($id);
             
-            $userForm = $this->createForm(EditUserType::class, $user);
+            $userForm = $this->createForm(EditUserType::class, $user,[
+                'is_admin' => false,
+                'is_not_admin' => true,
+                
+            ]);
             $userForm -> handleRequest($request);
 
             if ($userForm->isSubmitted() && $userForm->isValid()) {
 
-                  // Handle the uploaded avatar image
+                  // Handle the uploaded avatar image       
                 $avatar = $user->getAvatar();
                 $user->setAvatar($avatar);
                 $entityManager = $this->getDoctrine()
@@ -79,6 +83,7 @@ class AdminController extends AbstractController
             return $this->render('admin/editUser.html.twig', [
                 'user' => $user,
                 'userForm' => $userForm->createView(),
+                'isAdmin' => true,
             ]);
     } 
 

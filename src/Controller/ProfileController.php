@@ -63,7 +63,10 @@ class ProfileController extends AbstractController
     {       
             $user = $repo->find($id);
             
-            $userForm = $this->createForm(EditUserType::class, $user);
+            $userForm = $this->createForm(EditUserType::class, $user, [
+                'is_admin' => true,
+                'is_not_admin' =>false,
+            ]);
             $userForm -> handleRequest($request);
 
             if ($userForm->isSubmitted() && $userForm->isValid()) {

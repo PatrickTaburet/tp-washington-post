@@ -21,7 +21,7 @@
                 <div class="collapse navbar-collapse" id="navbarColor03">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Articles
+                            <a class="nav-link active" href="{{ path('gallery')}}">Articles
                                 <span class="visually-hidden">(current)</span>
                             </a>
                         </li>
@@ -35,7 +35,6 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Editor</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Profile</a>
                                 <a class="dropdown-item" href="{{ path('article_list')}}">Article list</a>
                                 <a class="dropdown-item" href="{{ path('article_myArticles')}}">My Articles</a>
                                 <div class="dropdown-divider"></div>

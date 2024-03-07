@@ -42,3 +42,22 @@
 img{
   max-width: 300px;
 }
+
+
+/* Articles */
+
+.articleCard{
+  width: 260px;
+}
+.articlePage{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px;
+  margin-top: 40px;
+  gap: 20px;
+}
+.scroll {
+  max-height: 400px;
+  overflow-y: auto;
+}

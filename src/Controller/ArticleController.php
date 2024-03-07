@@ -34,6 +34,8 @@ class ArticleController extends AbstractController
             'articles'=> $articles
         ]);
     }
+    
+
     /**
      * @Route("/myArticles", name="myArticles")
      */

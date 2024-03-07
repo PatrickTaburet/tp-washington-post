@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+<div class="articlePage">
+  {% for article in articles %}
+
+  <div class="card mb-3 articleCard">
+    <h3 class="card-header">{{article.title}}</h3>
+    {# <div class="card-body">
+      <h5 class="card-title">Special title treatment</h5>
+      <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+    </div> #}
+    <div class="mt-4">
+      <img src="{{ vich_uploader_asset(article, 'imageFile')}}" alt="article_picture" width="100%" height="200">
+    </div>
+    <div class="card-body d-flex align-items-center">
+      <p class="card-text scroll">{{article.content}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{article.user.name}} {{article.user.firstname}}</li>
+      <li class="list-group-item">{{article.updatedAt|date('F j, Y, g:i a')}}</li>
+    </ul>
+    <div class="card-footer text-muted">
+      {% set publicationDate = article.updatedAt %}
+      {% set now = "now" %}
+      {% set daysSincePublished = (now|date('U') - publicationDate.getTimestamp()) / 86400 %}
+      {% set daysSincePublished = daysSincePublished|round(0, 'floor')  %}
+      <li class="list-group-item">Article published {{ daysSincePublished }} days ago.</li>
+    </div>
+    <div class="card-footer ">
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+    </div>
+  </div>
+
+  {% endfor %}
+</div>
+
+{# 
+<img src="{{ asset('images/app/washington_post.png') }}" alt="washington_post" class="d-block mx-auto">
+<h1 class="text-center mb-4 mt-4">ARTICLES :</h1>
+<div class="container ">
+    <table class="table table-dark table-striped ">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Title</th>
+          <th scope="col">Content</th>
+          <th scope="col">Picture</th>
+          <th scope="col">Author</th>
+        </tr>
+      </thead>
+      {% for article in articles %}
+      <tbody class="table table-striped ">
+        <tr>
+          <th>{{article.id}}</th>
+          <td>{{article.title}}</td>
+          <td>{{article.content}}</td>
+          <td><img src="{{ vich_uploader_asset(article, 'imageFile')}}" alt="article_picture"></td>
+          <td>{{article.user.name}} {{article.user.firstname}}</td>
+           
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+    <button  ><a href="{{ path('article_create')}}" class="text-decoration-none text-dark"> Add an article </a> </button>
+</div> #}
+{% endblock %}
