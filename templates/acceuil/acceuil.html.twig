@@ -3,23 +3,25 @@
 {% block title %}Acceuil{% endblock %}
 
 {% block body %}
-<body class="homeBody">
-    
 
-    <h3 class="text-center fst-italic">Democracy Dies in Darkness</h3>
-    <img class="dailyNewsImg" src="{{ asset('images/app/newspaper.png') }}" alt="newspaper">
-    <div class="card border-primary mb-3 newsCard" style="max-width: 20rem;">
-        <div class="text-center card-header">{{article.title}}</div>
-        <div class="card-body newscardContent ">
-            <div class="scrollable-content">
-                <p class="card-text">{{article.content}}</p>
-                <p class="card-title">{{article.user.firstname}} {{article.user.name}}</p>
+<h3 class="text-center fst-italic">Democracy Dies in Darkness</h3>
+<div class="homeBody">
+    <div class="leftHompage">
+         <img class="dailyNewsImg" src="{{ asset('images/app/newspaper.png') }}" alt="newspaper">
+        <div class="card border-primary mb-3 newsCard" style="max-width: 20rem;">
+            <div class="text-center card-header">{{article.title}}</div>
+            <div class="card-body newscardContent ">
+                <div class="scrollable-content">
+                    <p class="card-text">{{article.content}}</p>
+                    <p class="card-title">{{article.user.firstname}} {{article.user.name}}</p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="homePageBox text-center">
+   
+    <div class="homePageBox ">
         
-        <div class="newsCards">
+        <div class="newsCards text-center">
             <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
                 <div class="card-header">Cheese News</div>
                     <div class="card-body">
@@ -70,5 +72,5 @@
             </div>
         </div>
     </div>   
-    </body>             
+    </div>             
 {% endblock %}

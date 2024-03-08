@@ -65,7 +65,7 @@ img{
   scale: 2;
   display: block;
   margin-top: 100px;
-  margin-bottom: 30px;
+  margin-bottom: 70px;
 }
 
 
@@ -196,33 +196,43 @@ img{
 
 /* -------homepage------ */
 
-.dailyNewsImg{
-  width: 40%;
-  scale: 3;
-  position: absolute;
-  left: 19%;
-  top: 60%;
-  margin-left: 50px;
- 
-}
 .homePageBox{
-  margin: 40px;
-  display: flex;
-  justify-content: right;
-
+  width: 50%;
+  z-index: 3;
 }
 .newsCards{ 
   display: flex;
+    justify-content: center;
   flex-wrap: wrap;
-  width: 45%;
+  width:100%;
   gap:10px;
-  top: 500px;
+  margin-top: 15%;
+  margin-left: 15%;
 
 }
-.newsCard{
+.leftHompage{
   position: relative;
-  left: 21%;
-  top: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  margin-top: 300px;
+}
+
+.dailyNewsImg{
+  position: absolute;
+  z-index: 1;
+  top: 50%; 
+  left: 50%;
+  scale: 3;
+}
+.newsCard {
+  position: absolute;
+  top: 50%; 
+  left: 48%;
+  z-index: 2;
+  min-width: 300px;
 }
 .newscardContent{
   max-height: 300px;
@@ -232,37 +242,74 @@ img{
   height: 100%; 
   overflow-y: auto; 
 }
-/* --------------- SmartPhones <425px ---------------*/
-/*  
-@media screen and (max-width: 400px){
-  
+.homeBody{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  z-index: 0;
+  margin-right: 5%
+}
+
+
+ /* --------------- Small screens <1150px ---------------*/
+
+@media screen and (max-width: 1150px){
+  .homePageBox{
+    width: 80%;
+    z-index: 3;
+    margin-top: 500px;
+  }
+  .newsCards{ 
+    margin-top: 0%;
+    margin-left: 0%;
+  }
+  .homeBody{
+    flex-direction: column;
+    align-items: center;
+    margin-right:0;
+  }
+  .leftHompage{
+    width: 50%;
+    height: 100%;
+    margin-top: 300px;
+  }
   .dailyNewsImg{
-   position: relative;
-   height: 300px;
-   left: 270px;
-   top: 350px;
+    position: absolute;
+    z-index: 1;
+    top: 50%; 
+    left: 25%;
+    scale: 3;
+  }
+  .newsCard {
+    position: absolute;
+    top: 50%; 
+    left: 23%;
+    z-index: 2;
+    min-width: 300px;
+  }
+}
+/* --------------- Tablettes <800px ---------------*/
+
+@media screen and (max-width: 800px){
+  .dailyNewsImg{
+    scale: 2;
  
   }
+  .newscardContent{
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  .leftHompage{
+    margin-top: 200px;
+    margin-right: 50px;
+  }
+  .washPostLogo{
+    scale: 1.5;
 
-  .newsCards{
-    margin-top: 2%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 100%;
-    gap:10px;
-  
   }
   .homePageBox{
-    background-color: #337ab7;
-    margin: 20px;
-    display: flex;
-    justify-content: center;
-    align-items:end;
-    flex-direction: column;
-    position: relative;
-    top: 730px;
-  
+    width: 80%;
+    z-index: 3;
+    margin-top: 400px;
   }
-} */
+}
