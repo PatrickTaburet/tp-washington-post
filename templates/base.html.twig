@@ -12,6 +12,75 @@
       
     </head>
     <header>
+
+    {# ------profile modal------ #}
+     {% if app.user %}
+    <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title mx-auto" id="exampleModalLabel">{% if app.user %}{{app.user.firstname}} {% endif %}profile</h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <div class="modal-body">
+
+         {# ------card inside modal------ #}
+           
+                <div class="card mb-3">
+                    <h3 class="card-header text-center">{{app.user.firstname}} {{app.user.name}}</h3>
+                    <div class="card-body">
+                        {% if (is_granted('ROLE_EDITOR')) %}
+                            <h3 class="text-center">ROLE : <span class="roleLabel">EDITOR</span></h3>
+                        {% endif %}
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <img src="{{ vich_uploader_asset(app.user.avatar, 'imageFile')}}" alt="avatar_picture">
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-center">{{app.user.email}}</li>
+                    </ul>
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-text">{{app.user.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="modal-footer mb-4">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="{{path('profile', {'id': app.user.id})}}"><button type="button" class="btn btn-primary">Edit profile</button></a>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {# ------admin modal------ #}
+
+    <div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-light d-flex justify-content-center">
+                    <h1 class="modal-title text-center " id="exampleModalLabel">Admin Pannel</h1>
+                </div>
+            <div class="modal-body d-flex justify-content-center">    
+                <a href="{{ path('admin_users')}}" ><button class="button-13 adminButton">USERS LIST</button></a>
+                <a href="{{ path('article_list')}}" ><button class="button-13 adminButton">ARTICLE LIST</button></a>
+               
+            </div>
+                <div class="modal-footer mb-4 bg-light">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+
+
+
+    {# ------navbar------- #}
         <nav class="navbar navbar-expand-lg bg-light fixed-top" data-bs-theme="light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ path('home')}}" >Home</a>
@@ -31,6 +100,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">About</a>
                         </li>
+
+                        {# Rollup menu for editor roles to manage the articles #}
+
                         {% if is_granted('ROLE_EDITOR') %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Editor</a>
@@ -43,23 +115,30 @@
                         </li>
                         {% endif %}
                     </ul>
+
+                 {# Navbar buttons, different depending on the roles & user adress, link  to profile modale  #}
+
                     <div class="rightNavBar">
                         {% if app.user == false %}
-                        <button class="button-13"><a href="{{ path('app_login')}}" class="text-decoration-none text-black" >LOG IN</a></button>
-                        <button class="button-13"><a href="{{ path('register')}}" class="text-decoration-none text-black">SIGN IN</a></button>
+                        <a href="{{ path('app_login')}}" class="text-decoration-none text-black" ><button class="button-13">LOG IN</button></a>
+                        <a href="{{ path('register')}}" class="text-decoration-none text-black"><button class="button-13">SIGN IN</button></a>
                         {% endif %}
 
                         {% if app.user %}
                             <div class="rightNavBar">
-                                You are logged in as <span class="adress"><a href="{{path('profile', {'id': app.user.id})}}">{{ app.user.userIdentifier }}</a></span>
+                                You are logged in as 
+                                <span class="linkAdress">
+                                    <a  class="adress" data-toggle="modal" data-target="#profileModal">
+                                    {{ app.user.userIdentifier }}
+                                    </a>
+                                </span>
                                 {% if is_granted('ROLE_ADMIN') %}
-                                    <button  class="button-13"><a href="{{ path('admin_index')}}" class="text-decoration-none text-black">ADMIN</a></button>
+                                    <a href="#" data-toggle="modal" data-target="#adminModal" class="text-decoration-none text-black"><button  class="button-13">ADMIN</button></a>
                                 {% endif %}
-                                <button class="button-13"><a href="{{ path('app_logout') }}" class="text-decoration-none text-black">LOG OUT</a></button>
+                                <a href="{{ path('app_logout') }}" class="text-decoration-none text-black"><button class="button-13">LOG OUT</button></a>
                             </div>
 
                         {% endif %}
-
                     </div>
                 </div>
             </div>

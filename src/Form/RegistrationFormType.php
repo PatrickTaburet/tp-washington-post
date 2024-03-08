@@ -34,6 +34,8 @@ class RegistrationFormType extends AbstractType
             ->add('email')
             ->add('description')
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => "Agree terms",
+                'attr' => ['class' => 'm-2'],
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
@@ -45,7 +47,7 @@ class RegistrationFormType extends AbstractType
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
-                'options' => ['attr' => ['class' => 'password-field']],
+                'options' => ['attr' => ['class' => 'password-field m-2']],
                 'required' => true,
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],

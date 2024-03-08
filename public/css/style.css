@@ -16,7 +16,7 @@
   text-decoration: none;
   user-select: none;
   -webkit-user-select: none;
-  touch-action: manipulation;
+
   vertical-align: middle;
   width: 100px;
 }
@@ -71,6 +71,16 @@ img{
 
 /* Articles */
 
+#addArticle{
+  font-size: 25px;
+  width: 160px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
 .articleCard{
   width: 530px;
   
@@ -134,7 +144,20 @@ img{
   word-wrap:break-word;
   overflow-x: hidden;
 }
-
+.articleContent{
+  max-width: 500px; 
+  word-wrap: break-word;  
+}
+#titleCol{
+  max-width: 200px ;
+  word-wrap:break-word;
+  overflow-y: hidden;
+}
+.articleDate{
+  min-width: 200px ;
+  word-wrap:break-word;
+  overflow-y: hidden;
+}
 /* Profiles */
 
 .roleLabel{
@@ -144,7 +167,102 @@ img{
   font-size: 23px;
   color: white;
 }
-.articleContent{
-  max-width: 500px; 
-  word-wrap: break-word;  
+
+.loginForm{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5%;
 }
+.loginForm form {
+  width: 400px;
+}
+.linkAdress:hover{
+  cursor: pointer;
+}
+.adminButton{
+  font-size: 20px;
+  width: 200px;
+  height: 40px;
+  margin: 15px;
+}
+.articleButton{
+  font-size: 18px;
+  width: 120px;
+  height: 40px;
+  margin: 15px;
+}
+
+/* -------homepage------ */
+
+.dailyNewsImg{
+  width: 40%;
+  scale: 3;
+  position: absolute;
+  left: 19%;
+  top: 60%;
+  margin-left: 50px;
+ 
+}
+.homePageBox{
+  margin: 40px;
+  display: flex;
+  justify-content: right;
+
+}
+.newsCards{ 
+  display: flex;
+  flex-wrap: wrap;
+  width: 45%;
+  gap:10px;
+  top: 500px;
+
+}
+.newsCard{
+  position: relative;
+  left: 21%;
+  top: 250px;
+}
+.newscardContent{
+  max-height: 300px;
+  overflow-y: auto;
+}
+.scrollable-content {
+  height: 100%; 
+  overflow-y: auto; 
+}
+/* --------------- SmartPhones <425px ---------------*/
+/*  
+@media screen and (max-width: 400px){
+  
+  .dailyNewsImg{
+   position: relative;
+   height: 300px;
+   left: 270px;
+   top: 350px;
+ 
+  }
+
+  .newsCards{
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap:10px;
+  
+  }
+  .homePageBox{
+    background-color: #337ab7;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items:end;
+    flex-direction: column;
+    position: relative;
+    top: 730px;
+  
+  }
+} */

@@ -24,13 +24,6 @@ class ArticleController extends AbstractController
     public function index(ArticleRepository $repo): Response
     {
         $articles = $repo-> findAll();
-
-        // // Preload user settings
-        // foreach ($articles as $article) {
-        //    $article->getUser()->getName() ; 
-        //    $article->getUser()->getFirstname() ; 
-
-        // }
         return $this->render('article/articles.html.twig', [
             'articles'=> $articles
         ]);

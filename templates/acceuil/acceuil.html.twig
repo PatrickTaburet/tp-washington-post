@@ -3,21 +3,72 @@
 {% block title %}Acceuil{% endblock %}
 
 {% block body %}
+<body class="homeBody">
+    
 
-   <h1 class="text-center">ACCEUIL</h1>
-   
-    {# {% if is_granted('ROLE_ADMIN') %}
-        <button><a href="{{ path('admin_index')}}" class="btn btn-lg btn-primary">ADMIN</a></button>
-    {% endif %}
-    {% if app.user == false %}
-    <button><a href="{{ path('app_login')}}" class="btn btn-lg btn-primary">LOG IN</a></button>
-    <button><a href="{{ path('register')}}" class="btn btn-lg btn-primary">SIGN IN</a></button>
-    {% endif %}
-
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, 
-            <button><a href="{{ path('app_logout') }}" class="btn btn-lg btn-warning">LOG OUT</a></button>
+    <h3 class="text-center fst-italic">Democracy Dies in Darkness</h3>
+    <img class="dailyNewsImg" src="{{ asset('images/app/newspaper.png') }}" alt="newspaper">
+    <div class="card border-primary mb-3 newsCard" style="max-width: 20rem;">
+        <div class="text-center card-header">{{article.title}}</div>
+        <div class="card-body newscardContent ">
+            <div class="scrollable-content">
+                <p class="card-text">{{article.content}}</p>
+                <p class="card-title">{{article.user.firstname}} {{article.user.name}}</p>
+            </div>
         </div>
-    {% endif %} #}
+    </div>
+    <div class="homePageBox text-center">
+        
+        <div class="newsCards">
+            <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+                <div class="card-header">Cheese News</div>
+                    <div class="card-body">
+                        <h4 class="card-title">Melted cheese</h4>
+                        <p class="card-text">Boursin cheddar who moved my cheese. Queso stilton cheesy feet fondue cow edam mozzarella cheesecake. Cheese strings pepper jack blue castello cheddar boursin cheesecake brie lancashire. Babybel cheese slices croque monsieur mascarpone.</p>
+                    </div>
+                </div>
+                <div class="card light mb mb-3" style="max-width: 20rem;">
+                    <div class="card-header">Cheese News</div>
+                        <div class="card-body">
+                            <h4 class="card-title">Smelly fromage</h4>
+                            <p class="card-text">Gouda pepper jack fromage. Macaroni cheese feta mascarpone rubber cheese the big cheese blue castello cheese and biscuits blue castello. Manchego babybel airedale caerphilly pepper jack hard cheese fondue cut the cheese. </p>
+                        </div>
+                    </div>
+                    <div class="card bg-light mb-3" style="max-width: 20rem;">
+                        <div class="card-header">Cheese News</div>
+                            <div class="card-body">
+                                <h4 class="card-title">Loves port-salut</h4>
+                                <p class="card-text">Dolcelatte taleggio say cheese danish fontina camembert de normandie smelly cheese cheese triangles swiss. Boursin cheesecake cheese triangles lancashire cauliflower cheese.</p>
+                            </div>
+                        </div>
+                        <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+                        <div class="card-header">Cheese News</div>
+                            <div class="card-body">
+                                <h4 class="card-title">Cheese and wine</h4>
+                                <p class="card-text">Cheese triangles mozzarella mascarpone. Edam blue castello cheesecake camembert de normandie st. agur blue cheese mascarpone mascarpone paneer. </p>
+                            </div>
+                        </div>
+                        <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+                            <div class="card-header">Cheese News</div>
+                                <div class="card-body">
+                                <h4 class="card-title">Ricotta taleggio</h4>
+                                <p class="card-text">Chalk and cheese cheesy feet cheese triangles brie danish fontina gouda stinking bishop roquefort. Chalk and cheese cheese slices fromage frais edam boursin.</p>
+                            </div>
+                        </div>
+                            <div class="card bg-light mb-3" style="max-width: 20rem;">
+                                <div class="card-header">Cheese News</div>
+                                    <div class="card-body">
+                                        <h4 class="card-title">Fondue brie</h4>
+                                        <p class="card-text">Jarlsberg ricotta squirty cheese. Squirty cheese ricotta cream cheese chalk and cheese cheeseburger boursin everyone loves jarlsberg. Parmesan taleggio bavarian bergkase manchego manchego hard cheese red leicester boursin. Edam st. agur blue cheese.</p>
+                                    </div>
+                                </div>
+         
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+    </body>             
 {% endblock %}

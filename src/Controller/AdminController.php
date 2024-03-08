@@ -25,15 +25,6 @@ class AdminController extends AbstractController
             'user' => $users->find($id)
         ]);
     }
-    /**
-     * @Route("/", name="index")
-     */
-    public function index(): Response
-    {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
-    }
 
     /**
     * @Route("/users", name="users")

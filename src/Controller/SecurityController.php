@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ArticleRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -12,9 +13,14 @@ class SecurityController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(): Response
+    public function home(ArticleRepository $repo): Response
     {
-        return $this->render('acceuil/acceuil.html.twig');
+        $articles = $repo->findAll();
+        $randomIndex = rand(0, count($articles) - 1);
+        $randomArticle = $articles[$randomIndex];
+        return $this->render('acceuil/acceuil.html.twig', [
+            'article' => $randomArticle
+        ]);
     }
 
     /**

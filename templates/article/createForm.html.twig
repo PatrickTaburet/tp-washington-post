@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}Create article{% endblock %}
 
 {% block body %}
 <div class="container">
     <div class="row">
-        <h3 class="mt-5 mb-5 text-center">Formulaire de création</h3>
+        <h1 class="mt-5 mb-5 text-center">Create article</h1>
         <div class="col-md-6 offset-md-3">
         {{ form_start(form) }}
             <div class="form-group text-black">
@@ -20,9 +20,9 @@
                 {{ form_label(form.imageFile) }}
                 {{ form_widget(form.imageFile, { "attr": {"class" : "form-control" } }) }}
             </div>
-            <div class="form-group">
-                <button class='btn btn-info mt-2 text-white'>Submit</button>
-               <a href="{{ path('article_list')}}" class='btn btn-info mt-2 text-white'> Back </a> 
+            <div class="form-group d-flex justify-content-center mt-4">
+                <button class='button-13 m-3 articleButton'>Submit</button>
+               <a href="{{ path('article_list')}}" class='button-13 pt-1 m-3 articleButton'> Back </a> 
             </div>
         {{ form_end(form) }}
         </div>

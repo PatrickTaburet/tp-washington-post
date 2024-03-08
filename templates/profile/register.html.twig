@@ -3,7 +3,52 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1 id="toto">Register</h1>
+<div class="container registerForm">
+        <div class="row">
+            <h1 class="mt-5 mb-5 text-center">Register</h1>
+            <div class="col-md-6 offset-md-3">
+            {{ form_start(registrationForm, {'attr': {'id': 'registrationForm'}}) }}            
+                <div class="form-group text-black mt-3">
+                    {{ form_label(registrationForm.firstname)}}
+                    {{ form_widget(registrationForm.firstname, { "attr": {"class" : "form-control" } }) }}
+                </div>
+                <div class="form-group text-black mt-3">
+                    {{ form_label(registrationForm.name)}}
+                    {{ form_widget(registrationForm.name, { "attr": {"class" : "form-control" } }) }}
+                </div>
+                <div class="form-group text-black mt-3">
+                    {{ form_label(registrationForm.email)}}
+                    {{ form_widget(registrationForm.email, { "attr": {"class" : "form-control" } }) }}
+                </div >
+                <div class="form-group  mt-3">
+                  {{ form_row(registrationForm.plainPassword, {
+                        label: 'Password'
+                    }) }}
+                </div>
+                <div class="form-group text-black mt-3">
+                    {{ form_label(registrationForm.description)}}
+                    {{ form_widget(registrationForm.description, { "attr": {"class" : "form-control" } }) }}
+                </div>
+                 <div class="imagePreview mt-3">
+                     {{ form_widget(registrationForm.avatar, { "attr": {"class" : "form-control" } }) }}
+                </div>
+                <div class="form-group text-black mt-4 d-flex justify-content-center">
+                    {{ form_label(registrationForm.agreeTerms, ) }}
+                    {{ form_widget(registrationForm.agreeTerms, ) }}
+                </div>
+                 <div class="d-flex justify-content-center">
+                    <button id="submitBtn" type="submit" class="button-13 mt-3 mb-3">Register</button>
+                    <a href="{{ path('home')}}" class=""> <button class='button-13 mt-3 mb-3'>Back</button></a> 
+                </div>
+            {{ form_end(registrationForm) }}
+               
+            </div>
+        </div>
+    </div>
+
+
+{# 
+    <h1>Register</h1>
 <div>
     {{ form_start(registrationForm, {'attr': {'id': 'registrationForm'}}) }}
         {{ form_row(registrationForm.email) }}
@@ -19,7 +64,7 @@
             {{ form_widget(registrationForm.avatar, { "attr": {"class" : "form-control" } }) }}
         </div>
    <button id="submitBtn" type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    {{ form_end(registrationForm) }} #}
 </div>   
 {# <div class="">
     {{ form_start(avatarForm, {'attr': {'id': 'avatarForm'}}) }}
