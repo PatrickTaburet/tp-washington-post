@@ -48,5 +48,11 @@
     <div class="d-flex justify-content-center">
      <a href="{{ path('home')}}"><button  class="button-13 mb-3 ">BACK</button></a>
     </div>
+
+    {# pagination #}
+
+    <div class="pagination navigation">
+        {{knp_pagination_render(users)}}
+    </div>
     
 {% endblock %}

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,9 +22,14 @@ class ArticleController extends AbstractController
     /**
      * @Route("/", name="list")
      */
-    public function index(ArticleRepository $repo): Response
+    public function index(ArticleRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
-        $articles = $repo-> findAll();
+        $data = $repo-> findAll();
+        $articles = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            9
+        );
         return $this->render('article/articles.html.twig', [
             'articles'=> $articles
         ]);
@@ -33,9 +39,14 @@ class ArticleController extends AbstractController
     /**
      * @Route("/myArticles", name="myArticles")
      */
-    public function myArticles(ArticleRepository $repo): Response
+    public function myArticles(ArticleRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
-        $articles = $repo-> findAll();
+        $data = $repo-> findAll();
+        $articles = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            9
+        );
 
         // // Preload user settings
         // foreach ($articles as $article) {

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Avatar;
 use App\Form\EditUserType;
 use App\Repository\UserRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,9 +30,14 @@ class AdminController extends AbstractController
     /**
     * @Route("/users", name="users")
     */
-    public function usersList(UserRepository $users): Response
+    public function usersList(UserRepository $users, PaginatorInterface $paginator, Request $request): Response
     {
-        $allUsers = $users->findAll();
+        $data = $users->findAll();
+        $allUsers = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            9
+        );
 
         // Preload Avatar objects
         foreach ($allUsers as $user) {

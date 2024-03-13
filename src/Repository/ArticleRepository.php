@@ -3,8 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\Article;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Model\SearchArticle;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Article>
@@ -16,9 +20,16 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ArticleRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+       /**
+     * @var PaginatorInterface
+     */
+    private $paginatorInterface;
+
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginatorInterface)
     {
         parent::__construct($registry, Article::class);
+        $this->paginatorInterface = $paginatorInterface;
+
     }
 
     public function add(Article $entity, bool $flush = false): void
@@ -54,13 +65,30 @@ class ArticleRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Article
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * Get articles thanks to SearchArticle value
+     * 
+     * @param SearchArticle $searchArticle
+     * @return PaginationInterface
+     * 
+     */
+
+   public function findBySearch(SearchArticle $searchArticle): PaginationInterface
+   {
+    
+        $data = $this->createQueryBuilder('p')
+            -> addOrderBy('p.updatedAt', 'DESC');
+
+        if(!empty($searchArticle->q)){
+            $data = $data
+                -> andWhere("p.title LIKE :q")
+                -> setParameter('q',"%{$searchArticle->q}%");
+        }
+        $data = $data
+            ->getQuery()
+            ->getResult();
+        $articles = $this-> paginatorInterface->paginate($data, $searchArticle->page, 9);
+
+        return $articles;
+   }
 }

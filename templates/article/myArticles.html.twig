@@ -38,4 +38,11 @@
 
     <a href="{{ path('article_create')}}" ><button  class="text-decoration-none button-13 adminButton">Add an article</button> </a> 
 </div>
+
+
+{# pagination #}
+
+<div class="pagination navigation">
+{{knp_pagination_render(articles)}}
+</div>
 {% endblock %}
